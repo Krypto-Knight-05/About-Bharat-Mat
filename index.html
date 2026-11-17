@@ -11,22 +11,24 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#1e3a8a', // Deep Blue
-                        secondary: '#ea580c', // Saffron accent
-                        success: '#16a34a' // Green accent
+                        appBlue: '#1e3a8a', 
+                        appOrange: '#ea580c', 
+                        appGreen: '#16a34a',
+                        appDark: '#0f172a'
                     },
                     animation: {
-                        'fade-in': 'fadeIn 1s ease-out forwards',
-                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                        'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     },
                     keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' },
-                        },
-                        slideUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' },
                         }
                     }
                 }
@@ -34,146 +36,235 @@
         }
     </script>
     <style>
+        /* Animation delays for snake-like grid reveal */
         .delay-100 { animation-delay: 100ms; }
         .delay-200 { animation-delay: 200ms; }
         .delay-300 { animation-delay: 300ms; }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.2);
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+        .delay-600 { animation-delay: 600ms; }
+        
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .app-card {
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.04);
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+            border-radius: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.12);
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-primary selection:text-white">
+<body class="bg-white text-slate-800 font-sans antialiased selection:bg-appBlue selection:text-white relative overflow-x-hidden">
+
+    <!-- Ambient App-like Background Elements -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-orange-100 rounded-full mix-blend-multiply filter blur-[100px] opacity-60 animate-float"></div>
+        <div class="absolute top-[20%] right-[-10%] w-[600px] h-[600px] bg-blue-100 rounded-full mix-blend-multiply filter blur-[120px] opacity-50 animate-float delay-200"></div>
+        <div class="absolute bottom-[-10%] left-[20%] w-[500px] h-[500px] bg-green-100 rounded-full mix-blend-multiply filter blur-[100px] opacity-50 animate-float delay-400"></div>
+    </div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 glass-card shadow-sm">
+    <nav class="fixed w-full z-50 glass-nav transition-all">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-check-to-slot text-primary text-2xl"></i>
-                    <span class="font-bold text-2xl tracking-tight text-primary">Bharat <span class="text-secondary">Mat</span></span>
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center">
+                    <span class="font-extrabold text-2xl tracking-tight">
+                        <span class="text-appOrange">Bharat</span><span class="text-appBlue">Mat</span>
+                    </span>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#features" class="text-slate-600 hover:text-primary transition-colors font-medium">Features</a>
-                    <a href="#video" class="text-slate-600 hover:text-primary transition-colors font-medium">Demo</a>
-                    <a href="#documents" class="text-slate-600 hover:text-primary transition-colors font-medium">Documents</a>
+                <div class="hidden md:flex space-x-4 items-center">
+                    <a href="YOUR_PPT_LINK_HERE" target="_blank" class="px-5 py-2.5 bg-white text-slate-700 border border-slate-200 text-sm font-semibold rounded-full hover:bg-slate-50 transition-all shadow-sm">
+                        View Deck
+                    </a>
+                    <a href="#documents" class="px-5 py-2.5 bg-appDark text-white text-sm font-semibold rounded-full hover:bg-appBlue transition-all shadow-md">
+                        View Proposal
+                    </a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col items-center text-center">
-        <div class="inline-block px-4 py-1.5 rounded-full bg-blue-100 text-primary font-semibold text-sm mb-6 animate-fade-in">
-            Domain 2: One Nation One Election
-        </div>
-        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 opacity-0 animate-slide-up delay-100">
-            The Digital Fortress for a <br class="hidden md:block" />
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">New Electoral Era</span>
+    <section class="pt-40 pb-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col items-center text-center relative">
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 opacity-0 animate-fade-in-up leading-tight">
+            For a Smarter, Trusted, and <br class="hidden md:block" />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-appOrange via-appBlue to-appGreen">Engaged Democracy</span>
         </h1>
-        <p class="mt-4 text-xl text-slate-600 max-w-3xl mb-10 opacity-0 animate-slide-up delay-200">
-            A secure, verifiable, and interactive platform for political awareness and election integrity. Empowering your vote against misinformation.
+        
+        <p class="mt-4 text-xl text-slate-600 max-w-2xl mx-auto mb-10 opacity-0 animate-fade-in-up delay-100 leading-relaxed">
+            A secure digital fortress combating misinformation. Visually understand constitutional reforms, verify political claims in real-time, and track official Election Commission updates seamlessly.
         </p>
-        <div class="flex gap-4 opacity-0 animate-slide-up delay-300">
-            <a href="#video" class="px-8 py-3.5 bg-primary text-white font-medium rounded-lg hover:bg-blue-800 transition-all shadow-lg hover:shadow-xl flex items-center gap-2">
-                <i class="fa-solid fa-play"></i> Watch Demo
+        
+        <div class="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-up delay-200">
+            <a href="#video" class="px-8 py-4 bg-appBlue text-white font-semibold rounded-full hover:bg-blue-900 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-3">
+                <i class="fa-solid fa-circle-play text-lg"></i> Watch App Demo
             </a>
-            <a href="#documents" class="px-8 py-3.5 bg-white text-primary border border-slate-200 font-medium rounded-lg hover:bg-slate-50 transition-all shadow-sm flex items-center gap-2">
-                <i class="fa-solid fa-file-lines"></i> View Proposal
+            <a href="#features" class="px-8 py-4 bg-white text-slate-700 border border-slate-200 font-semibold rounded-full hover:bg-slate-50 transition-all shadow-sm flex items-center justify-center gap-3">
+                Explore Features
             </a>
+        </div>
+    </section>
+
+    <!-- App Interface Showcase (Visual Break) -->
+    <section class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mb-32 opacity-0 animate-fade-in-up delay-300">
+        <div class="app-card p-2 sm:p-4 bg-white/50 backdrop-blur-md border border-white/40">
+            <div class="rounded-2xl overflow-hidden bg-slate-900 relative aspect-video flex items-center justify-center">
+                <!-- Fallback/Placeholder for the App UI -->
+                <div class="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900"></div>
+                <div class="relative text-center z-10 p-8">
+                    <i class="fa-solid fa-mobile-screen-button text-5xl text-slate-400 mb-4 animate-float"></i>
+                    <h3 class="text-2xl font-bold text-white mb-2">Bharat Mat App Experience</h3>
+                    <p class="text-slate-400">Scroll down to see the live video demo and core features.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Features Section -->
+    <section id="features" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 opacity-0 animate-fade-in-up">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">A Dual Crisis, Solved.</h2>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">Bridging the civic knowledge gap around One Nation One Election while deploying state-of-the-art AI to fight political deepfakes.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Feature 1 (Row 1, Left) -->
+                <div class="app-card p-8 opacity-0 animate-fade-in-up delay-100">
+                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-appBlue text-2xl shadow-inner">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">ONOE Digital Twin</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Interactive Indian map visualizing the High-Level Committee's recommendations. Clearly track state tenure curtailments (Red) and extensions (Green) aligned with the 2029 election cycle.
+                    </p>
+                </div>
+
+                <!-- Feature 2 (Row 1, Center) -->
+                <div class="app-card p-8 opacity-0 animate-fade-in-up delay-200">
+                    <div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center mb-6 text-appOrange text-2xl shadow-inner">
+                        <i class="fa-solid fa-microscope"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Anti-Misinformation Suite</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Our Forensic Lab detects AI-generated content and deepfakes using DeBERTa models. View forensic heatmaps, AI confidence scores, and blockchain-logged immutable verdicts on viral claims.
+                    </p>
+                </div>
+
+                <!-- Feature 3 (Row 1, Right) -->
+                <div class="app-card p-8 opacity-0 animate-fade-in-up delay-300">
+                    <div class="w-14 h-14 bg-green-50 rounded-2xl flex items-center justify-center mb-6 text-appGreen text-2xl shadow-inner">
+                        <i class="fa-solid fa-building-columns"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">ECI Situation Room</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Your single source of truth. Get live, verified updates directly from the Election Commission. Access original PDF circulars, legal guidelines, and simplified summaries of complex electoral procedures.
+                    </p>
+                </div>
+
+                <!-- Feature 4 (Row 2, Left - Animates Last) -->
+                <div class="app-card p-8 opacity-0 animate-fade-in-up delay-600">
+                    <div class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center mb-6 text-slate-700 text-2xl shadow-inner">
+                        <i class="fa-solid fa-scale-balanced"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">360° Party View Hub</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Access a neutral, side-by-side comparison of party manifestos and policies. A dedicated Civic AI Assistant explains voting rules and constitutional changes in your regional language.
+                    </p>
+                </div>
+
+                <!-- Feature 5 (Row 2, Center - Animates Second in Row 2) -->
+                <div class="app-card p-8 opacity-0 animate-fade-in-up delay-500">
+                    <div class="w-14 h-14 bg-blue-50 rounded-2xl flex items-center justify-center mb-6 text-appBlue text-2xl shadow-inner">
+                        <i class="fa-solid fa-fingerprint"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Verified & Private Access</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Integrated securely with DigiLocker and Aadhaar APIs. Zero-Knowledge Proofs ensure your identity stays private while completely eliminating bots and coordinated manipulation on the platform.
+                    </p>
+                </div>
+                
+                <!-- Feature 6 (Row 2, Right - Animates First in Row 2) -->
+                <div class="app-card p-8 opacity-0 animate-fade-in-up delay-400">
+                    <div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center mb-6 text-appOrange text-2xl shadow-inner">
+                        <i class="fa-solid fa-qrcode"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Scan & Verify</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Designed to integrate with voter slip QR codes for instant, last-mile verified awareness on election day.
+                    </p>
+                </div>
+
+            </div>
         </div>
     </section>
 
     <!-- Video Section -->
-    <section id="video" class="py-20 bg-slate-900 text-white">
+    <section id="video" class="py-24 relative z-10">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl font-bold mb-10">See Bharat Mat in Action</h2>
-            <div class="relative w-full rounded-2xl overflow-hidden shadow-2xl bg-black border border-slate-700" style="padding-top: 56.25%;">
-                <!-- INGEST DEMO VIDEO HERE -->
-                <iframe 
-                    class="absolute top-0 left-0 w-full h-full"
-                    src="YOUR_VIDEO_LINK_HERE" 
-                    title="Bharat Mat Demo Video" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen>
-                </iframe>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-bold text-slate-900 mb-4">Combating The Dual Crisis</h2>
-                <p class="text-slate-600 max-w-2xl mx-auto">Bridging the civic knowledge gap around constitutional reforms while fighting AI-generated political deepfakes.</p>
-            </div>
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6 text-primary text-2xl">
-                        <i class="fa-solid fa-map-location-dot"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">ONOE Digital Twin</h3>
-                    <p class="text-slate-600">Interactive Indian map visualizing the High-Level Committee's report with real-time state tenure curtailment and extension tracking.</p>
-                </div>
-                <!-- Feature 2 -->
-                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mb-6 text-secondary text-2xl">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">Forensic Lab</h3>
-                    <p class="text-slate-600">AI-powered misinformation cleanup engine. Detects deepfakes and generates forensic heatmaps cross-referenced with official ECI data.</p>
-                </div>
-                <!-- Feature 3 -->
-                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                    <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-6 text-success text-2xl">
-                        <i class="fa-solid fa-landmark"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-slate-900 mb-3">ECI Situation Room</h3>
-                    <p class="text-slate-600">Single source of truth providing live, verified updates directly from the Election Commission, complete with original PDF circulars.</p>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-12">See Bharat Mat in Action</h2>
+            <div class="app-card p-2 sm:p-4 bg-white/50 backdrop-blur-md">
+                <div class="relative w-full rounded-2xl overflow-hidden bg-black" style="padding-top: 56.25%;">
+                    <!-- INGEST DEMO VIDEO HERE -->
+                    <iframe 
+                        class="absolute top-0 left-0 w-full h-full"
+                        src="YOUR_VIDEO_LINK_HERE" 
+                        title="Bharat Mat Demo Video" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Documents Section (PPT & Proposal) -->
-    <section id="documents" class="py-24 bg-slate-50 border-t border-slate-200">
+    <section id="documents" class="py-24 relative z-10 bg-slate-50/50 border-t border-slate-100">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             
             <!-- Pitch Deck Embed -->
-            <div class="mb-20">
-                <div class="flex items-center justify-between mb-8">
+            <div class="mb-24">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
                     <div>
-                        <h2 class="text-3xl font-bold text-slate-900">Pitch Deck</h2>
-                        <p class="text-slate-600 mt-2">Strategic overview, UI mockups, and public awareness strategy.</p>
+                        <h2 class="text-3xl font-extrabold text-slate-900">Pitch Deck</h2>
+                        <p class="text-slate-600 mt-2 text-lg">Strategic overview, UI mockups, and public awareness strategy.</p>
                     </div>
-                    <a href="YOUR_PPT_LINK_HERE" target="_blank" class="hidden sm:inline-flex items-center gap-2 text-primary font-medium hover:underline">
-                        Open in new tab <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                    <a href="YOUR_PPT_LINK_HERE" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 text-slate-700 font-semibold rounded-full hover:bg-slate-50 transition-all shadow-sm">
+                        Open Full Screen <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
                     </a>
                 </div>
-                <div class="w-full rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-white" style="height: 600px;">
+                <div class="app-card overflow-hidden h-[600px] border-0">
                     <!-- INGEST PPT HERE -->
-                    <iframe src="YOUR_PPT_LINK_HERE" width="100%" height="100%" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                    <iframe src="YOUR_PPT_LINK_HERE" width="100%" height="100%" frameborder="0" allowfullscreen="true" class="bg-slate-100"></iframe>
                 </div>
             </div>
 
             <!-- Project Proposal Embed -->
             <div>
-                <div class="flex items-center justify-between mb-8">
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
                     <div>
-                        <h2 class="text-3xl font-bold text-slate-900">Project Proposal</h2>
-                        <p class="text-slate-600 mt-2">Technical architecture, problem statements, and implementation roadmap.</p>
+                        <h2 class="text-3xl font-extrabold text-slate-900">Project Proposal</h2>
+                        <p class="text-slate-600 mt-2 text-lg">Technical architecture, problem statements, and implementation roadmap.</p>
                     </div>
-                    <a href="YOUR_PROPOSAL_LINK_HERE" target="_blank" class="hidden sm:inline-flex items-center gap-2 text-primary font-medium hover:underline">
-                        Open in new tab <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                    <a href="YOUR_PROPOSAL_LINK_HERE" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 bg-white border border-slate-200 text-slate-700 font-semibold rounded-full hover:bg-slate-50 transition-all shadow-sm">
+                        Open Full Screen <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
                     </a>
                 </div>
-                <div class="w-full rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-white" style="height: 800px;">
+                <div class="app-card overflow-hidden h-[800px] border-0">
                     <!-- INGEST PROPOSAL PDF HERE -->
-                    <iframe src="YOUR_PROPOSAL_LINK_HERE" width="100%" height="100%" frameborder="0" allowfullscreen="true"></iframe>
+                    <iframe src="YOUR_PROPOSAL_LINK_HERE" width="100%" height="100%" frameborder="0" allowfullscreen="true" class="bg-slate-100"></iframe>
                 </div>
             </div>
 
@@ -181,19 +272,42 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-400 py-12 text-center">
+    <footer class="bg-appDark text-slate-400 py-16 text-center border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-center items-center gap-2 mb-6">
-                <i class="fa-solid fa-check-to-slot text-white text-3xl"></i>
-                <span class="font-bold text-3xl text-white tracking-tight">Bharat <span class="text-secondary">Mat</span></span>
+            <div class="flex justify-center items-center mb-6">
+                <span class="font-extrabold text-3xl tracking-tight">
+                    <span class="text-appOrange">Bharat</span><span class="text-white">Mat</span>
+                </span>
             </div>
-            <p class="mb-4 text-slate-300 font-medium text-lg">Developed by Team Tensor Troops</p>
-            <p class="text-sm">Aryan Bansal • Aryan Gupta • Arnav Bansal</p>
-            <div class="mt-8 pt-8 border-t border-slate-800 text-sm">
-                &copy; 2026 Bharat Mat. All rights reserved.
+            <p class="mb-4 text-slate-300 font-semibold text-lg">Developed by Team Tensor Troops</p>
+            <p class="text-sm font-medium tracking-wide">Arnav Bansal • Aryan Bansal • Aryan Gupta</p>
+            
+            <div class="mt-12 pt-8 border-t border-slate-800/50 flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+                <p>&copy; 2026 Bharat Mat.</p>
+                <div class="flex gap-6">
+                    <a href="mailto:bansalarnav546@gmail.com" class="hover:text-white transition-colors">Contact Team</a>
+                </div>
             </div>
         </div>
     </footer>
 
+    <!-- Intersection Observer for Scroll Animations -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.animate-fade-in-up').forEach((el) => {
+                el.style.animationPlayState = 'paused';
+                observer.observe(el);
+            });
+        });
+    </script>
 </body>
 </html>
