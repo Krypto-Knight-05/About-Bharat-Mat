@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharat Mat | Empowering Your Vote</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a8a', // Deep Blue
+                        secondary: '#ea580c', // Saffron accent
+                        success: '#16a34a' // Green accent
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-primary selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-card shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-check-to-slot text-primary text-2xl"></i>
+                    <span class="font-bold text-2xl tracking-tight text-primary">Bharat <span class="text-secondary">Mat</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#features" class="text-slate-600 hover:text-primary transition-colors font-medium">Features</a>
+                    <a href="#video" class="text-slate-600 hover:text-primary transition-colors font-medium">Demo</a>
+                    <a href="#documents" class="text-slate-600 hover:text-primary transition-colors font-medium">Documents</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col items-center text-center">
+        <div class="inline-block px-4 py-1.5 rounded-full bg-blue-100 text-primary font-semibold text-sm mb-6 animate-fade-in">
+            Domain 2: One Nation One Election
+        </div>
+        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight text-slate-900 mb-6 opacity-0 animate-slide-up delay-100">
+            The Digital Fortress for a <br class="hidden md:block" />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-500">New Electoral Era</span>
+        </h1>
+        <p class="mt-4 text-xl text-slate-600 max-w-3xl mb-10 opacity-0 animate-slide-up delay-200">
+            A secure, verifiable, and interactive platform for political awareness and election integrity. Empowering your vote against misinformation.
+        </p>
+        <div class="flex gap-4 opacity-0 animate-slide-up delay-300">
+            <a href="#video" class="px-8 py-3.5 bg-primary text-white font-medium rounded-lg hover:bg-blue-800 transition-all shadow-lg hover:shadow-xl flex items-center gap-2">
+                <i class="fa-solid fa-play"></i> Watch Demo
+            </a>
+            <a href="#documents" class="px-8 py-3.5 bg-white text-primary border border-slate-200 font-medium rounded-lg hover:bg-slate-50 transition-all shadow-sm flex items-center gap-2">
+                <i class="fa-solid fa-file-lines"></i> View Proposal
+            </a>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section id="video" class="py-20 bg-slate-900 text-white">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-10">See Bharat Mat in Action</h2>
+            <div class="relative w-full rounded-2xl overflow-hidden shadow-2xl bg-black border border-slate-700" style="padding-top: 56.25%;">
+                <!-- INGEST DEMO VIDEO HERE -->
+                <iframe 
+                    class="absolute top-0 left-0 w-full h-full"
+                    src="YOUR_VIDEO_LINK_HERE" 
+                    title="Bharat Mat Demo Video" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Combating The Dual Crisis</h2>
+                <p class="text-slate-600 max-w-2xl mx-auto">Bridging the civic knowledge gap around constitutional reforms while fighting AI-generated political deepfakes.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-14 h-14 bg-blue-100 rounded-xl flex items-center justify-center mb-6 text-primary text-2xl">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">ONOE Digital Twin</h3>
+                    <p class="text-slate-600">Interactive Indian map visualizing the High-Level Committee's report with real-time state tenure curtailment and extension tracking.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-14 h-14 bg-orange-100 rounded-xl flex items-center justify-center mb-6 text-secondary text-2xl">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Forensic Lab</h3>
+                    <p class="text-slate-600">AI-powered misinformation cleanup engine. Detects deepfakes and generates forensic heatmaps cross-referenced with official ECI data.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="p-8 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                    <div class="w-14 h-14 bg-green-100 rounded-xl flex items-center justify-center mb-6 text-success text-2xl">
+                        <i class="fa-solid fa-landmark"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">ECI Situation Room</h3>
+                    <p class="text-slate-600">Single source of truth providing live, verified updates directly from the Election Commission, complete with original PDF circulars.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documents Section (PPT & Proposal) -->
+    <section id="documents" class="py-24 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Pitch Deck Embed -->
+            <div class="mb-20">
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h2 class="text-3xl font-bold text-slate-900">Pitch Deck</h2>
+                        <p class="text-slate-600 mt-2">Strategic overview, UI mockups, and public awareness strategy.</p>
+                    </div>
+                    <a href="YOUR_PPT_LINK_HERE" target="_blank" class="hidden sm:inline-flex items-center gap-2 text-primary font-medium hover:underline">
+                        Open in new tab <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                    </a>
+                </div>
+                <div class="w-full rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-white" style="height: 600px;">
+                    <!-- INGEST PPT HERE -->
+                    <iframe src="YOUR_PPT_LINK_HERE" width="100%" height="100%" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                </div>
+            </div>
+
+            <!-- Project Proposal Embed -->
+            <div>
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h2 class="text-3xl font-bold text-slate-900">Project Proposal</h2>
+                        <p class="text-slate-600 mt-2">Technical architecture, problem statements, and implementation roadmap.</p>
+                    </div>
+                    <a href="YOUR_PROPOSAL_LINK_HERE" target="_blank" class="hidden sm:inline-flex items-center gap-2 text-primary font-medium hover:underline">
+                        Open in new tab <i class="fa-solid fa-arrow-up-right-from-square text-sm"></i>
+                    </a>
+                </div>
+                <div class="w-full rounded-2xl overflow-hidden shadow-lg border border-slate-200 bg-white" style="height: 800px;">
+                    <!-- INGEST PROPOSAL PDF HERE -->
+                    <iframe src="YOUR_PROPOSAL_LINK_HERE" width="100%" height="100%" frameborder="0" allowfullscreen="true"></iframe>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-12 text-center">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-center items-center gap-2 mb-6">
+                <i class="fa-solid fa-check-to-slot text-white text-3xl"></i>
+                <span class="font-bold text-3xl text-white tracking-tight">Bharat <span class="text-secondary">Mat</span></span>
+            </div>
+            <p class="mb-4 text-slate-300 font-medium text-lg">Developed by Team Tensor Troops</p>
+            <p class="text-sm">Aryan Bansal • Aryan Gupta • Arnav Bansal</p>
+            <div class="mt-8 pt-8 border-t border-slate-800 text-sm">
+                &copy; 2026 Bharat Mat. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
