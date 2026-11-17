@@ -62,14 +62,33 @@
             pointer-events: auto;
         }
 
-        /* --- RESPONSIVE SNAKE ANIMATION LOGIC --- */
-        /* Mobile & Tablet: Fast standard cascade down the list */
-        [data-aos].snake-dom-1 { transition-delay: 100ms; }
-        [data-aos].snake-dom-2 { transition-delay: 150ms; }
-        [data-aos].snake-dom-3 { transition-delay: 200ms; }
-        [data-aos].snake-dom-4 { transition-delay: 100ms; }
-        [data-aos].snake-dom-5 { transition-delay: 150ms; }
-        [data-aos].snake-dom-6 { transition-delay: 200ms; }
+        /* --- RESPONSIVE SNAKE & ZIG-ZAG ANIMATION LOGIC --- */
+        [data-aos="zig-zag-left"], [data-aos="zig-zag-right"] {
+            transition-property: transform, opacity;
+        }
+
+        /* Mobile State: Horizontal Slide & Alternating Width */
+        @media (max-width: 767px) {
+            .zig-zag-left { width: 90%; margin-right: auto; }
+            .zig-zag-right { width: 90%; margin-left: auto; }
+            
+            [data-aos="zig-zag-left"] { opacity: 0; transform: translateX(-40px); }
+            [data-aos="zig-zag-right"] { opacity: 0; transform: translateX(40px); }
+
+            /* Fast standard cascade down the list on mobile */
+            [data-aos].snake-dom-1 { transition-delay: 100ms; }
+            [data-aos].snake-dom-2 { transition-delay: 150ms; }
+            [data-aos].snake-dom-3 { transition-delay: 200ms; }
+            [data-aos].snake-dom-4 { transition-delay: 100ms; }
+            [data-aos].snake-dom-5 { transition-delay: 150ms; }
+            [data-aos].snake-dom-6 { transition-delay: 200ms; }
+        }
+
+        /* Desktop State: Standard Grid Width & Vertical Slide Up */
+        @media (min-width: 768px) {
+            .zig-zag-left, .zig-zag-right { width: 100%; margin: 0; }
+            [data-aos="zig-zag-left"], [data-aos="zig-zag-right"] { opacity: 0; transform: translateY(40px); }
+        }
 
         /* Desktop (lg+ breakpoints): 3-Column Grid Snake Pattern */
         @media (min-width: 1024px) {
@@ -79,6 +98,12 @@
             [data-aos].snake-dom-6 { transition-delay: 550ms; } /* Row 2 Right (4th) */
             [data-aos].snake-dom-5 { transition-delay: 700ms; } /* Row 2 Center (5th) */
             [data-aos].snake-dom-4 { transition-delay: 850ms; } /* Row 2 Left (6th & Final) */
+        }
+
+        /* Active State (Visible) */
+        [data-aos="zig-zag-left"].aos-animate, [data-aos="zig-zag-right"].aos-animate {
+            opacity: 1;
+            transform: translate(0);
         }
     </style>
 </head>
@@ -154,17 +179,16 @@
         </div>
     </section>
 
-    <!-- Video Section -->
+    <!-- Video Section (Fixed aspect ratio specifically for Google Drive UI) -->
     <section id="video" class="py-12 md:py-16 relative z-10 px-4">
         <div class="max-w-5xl mx-auto text-center" data-aos="fade-up" data-aos-delay="300">
             <div class="app-card p-1.5 sm:p-3 bg-white/50 backdrop-blur-md">
-                <div class="relative w-full rounded-[1.25rem] sm:rounded-2xl overflow-hidden bg-black shadow-lg" style="padding-top: 56.25%;">
+                <div class="w-full rounded-[1.25rem] sm:rounded-2xl overflow-hidden bg-black shadow-lg">
                     <!-- INGESTED DEMO VIDEO -->
                     <iframe 
-                        class="absolute top-0 left-0 w-full h-full"
+                        class="w-full h-[280px] sm:h-[450px] lg:h-[600px] border-0"
                         src="https://drive.google.com/file/d/1OUPHCCNKFsOgJxuXK9lJlVyQ4ugcq_vh/preview" 
                         title="Bharat Mat Demo Video" 
-                        frameborder="0" 
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                         allowfullscreen>
                     </iframe>
@@ -184,7 +208,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                 
                 <!-- DOM Item 1 (Row 1, Left) -->
-                <div data-aos="fade-up" class="app-card p-6 md:p-8 snake-dom-1">
+                <div data-aos="zig-zag-left" class="app-card p-6 md:p-8 zig-zag-left snake-dom-1">
                     <div class="w-12 h-12 md:w-14 md:h-14 bg-blue-50 rounded-xl md:rounded-2xl flex items-center justify-center mb-5 md:mb-6 text-appBlue text-xl md:text-2xl shadow-inner">
                         <i class="fa-solid fa-map-location-dot"></i>
                     </div>
@@ -195,7 +219,7 @@
                 </div>
 
                 <!-- DOM Item 2 (Row 1, Center) -->
-                <div data-aos="fade-up" class="app-card p-6 md:p-8 snake-dom-2">
+                <div data-aos="zig-zag-right" class="app-card p-6 md:p-8 zig-zag-right snake-dom-2">
                     <div class="w-12 h-12 md:w-14 md:h-14 bg-orange-50 rounded-xl md:rounded-2xl flex items-center justify-center mb-5 md:mb-6 text-appOrange text-xl md:text-2xl shadow-inner">
                         <i class="fa-solid fa-microscope"></i>
                     </div>
@@ -206,7 +230,7 @@
                 </div>
 
                 <!-- DOM Item 3 (Row 1, Right) -->
-                <div data-aos="fade-up" class="app-card p-6 md:p-8 snake-dom-3">
+                <div data-aos="zig-zag-left" class="app-card p-6 md:p-8 zig-zag-left snake-dom-3">
                     <div class="w-12 h-12 md:w-14 md:h-14 bg-green-50 rounded-xl md:rounded-2xl flex items-center justify-center mb-5 md:mb-6 text-appGreen text-xl md:text-2xl shadow-inner">
                         <i class="fa-solid fa-building-columns"></i>
                     </div>
@@ -217,7 +241,7 @@
                 </div>
 
                 <!-- DOM Item 4 (Row 2, Left -> Animates 6th on Desktop) -->
-                <div data-aos="fade-up" class="app-card p-6 md:p-8 snake-dom-4">
+                <div data-aos="zig-zag-right" class="app-card p-6 md:p-8 zig-zag-right snake-dom-4">
                     <div class="w-12 h-12 md:w-14 md:h-14 bg-slate-100 rounded-xl md:rounded-2xl flex items-center justify-center mb-5 md:mb-6 text-slate-700 text-xl md:text-2xl shadow-inner">
                         <i class="fa-solid fa-scale-balanced"></i>
                     </div>
@@ -228,7 +252,7 @@
                 </div>
 
                 <!-- DOM Item 5 (Row 2, Center -> Animates 5th on Desktop) -->
-                <div data-aos="fade-up" class="app-card p-6 md:p-8 snake-dom-5">
+                <div data-aos="zig-zag-left" class="app-card p-6 md:p-8 zig-zag-left snake-dom-5">
                     <div class="w-12 h-12 md:w-14 md:h-14 bg-blue-50 rounded-xl md:rounded-2xl flex items-center justify-center mb-5 md:mb-6 text-appBlue text-xl md:text-2xl shadow-inner">
                         <i class="fa-solid fa-fingerprint"></i>
                     </div>
@@ -239,7 +263,7 @@
                 </div>
                 
                 <!-- DOM Item 6 (Row 2, Right -> Animates 4th on Desktop) -->
-                <div data-aos="fade-up" class="app-card p-6 md:p-8 snake-dom-6">
+                <div data-aos="zig-zag-right" class="app-card p-6 md:p-8 zig-zag-right snake-dom-6">
                     <div class="w-12 h-12 md:w-14 md:h-14 bg-orange-50 rounded-xl md:rounded-2xl flex items-center justify-center mb-5 md:mb-6 text-appOrange text-xl md:text-2xl shadow-inner">
                         <i class="fa-solid fa-qrcode"></i>
                     </div>
